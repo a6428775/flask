@@ -4,12 +4,12 @@
  
 
         body {
-            font-size: 22px; /* Change font size as needed */
+            font-size: 40px; /* Change font size as needed */
             text-align: center;
         }
 
         /* Adjustments for smaller screens */
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1960px) {
             body {
                 display: flex;
                 flex-direction: column;
@@ -21,7 +21,8 @@
             #map_selection,
             #choosemap,
             #timelong,
-            #channel {
+            #channel,
+            #btn {
                 width: 80%; /* Adjust width as needed */
                 margin: 5px 0;
                 /* Add any other specific styles as needed */
@@ -32,8 +33,9 @@
         #map_selection,
         #choosemap,
         #timelong,
-        #channel {
-            font-size: 20px; /* Change font size for select elements */
+        #channel,
+        #btn {
+            font-size: 36px; /* Change font size for select elements */
             /* Add any other specific styles as needed */
         }
     </style>
@@ -90,10 +92,10 @@
     <div>
         
    
-        <button class="btn" onclick="submitForm()">確認送出</button>
+        <button class="btn" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
                 
          
-        <button class="btn" onclick="exitForm()">離開此頁</button>
+        <button class="btn" onclick="exitForm()" style="padding: 15px; font-size: larger;">離開此頁</button>
     </div>
     <!-- Your existing script and other elements -->
     <script>
