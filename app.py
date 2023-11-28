@@ -63,7 +63,9 @@ def home():
 ]
     return render_template('index.html',mapdata=data,channeldata= channeldata,timelongdata=timelongdata)
 
-
+@app.route('/')
+def main():
+  return 'Bot is aLive!'
 
 @app.route('/changeselectfield/', methods=['GET', 'POST'])
 def changeselectfield():
