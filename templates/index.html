@@ -1,6 +1,42 @@
 <!DOCTYPE html>
 <head>
+    <style>
+ 
 
+        body {
+            font-size: 22px; /* Change font size as needed */
+            text-align: center;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            /* Adjust specific elements for smaller screens if needed */
+            #map_selection,
+            #choosemap,
+            #timelong,
+            #channel {
+                width: 80%; /* Adjust width as needed */
+                margin: 5px 0;
+                /* Add any other specific styles as needed */
+            }
+        }
+
+        /* Additional styles for specific elements if needed */
+        #map_selection,
+        #choosemap,
+        #timelong,
+        #channel {
+            font-size: 20px; /* Change font size for select elements */
+            /* Add any other specific styles as needed */
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
 </head>
@@ -51,12 +87,40 @@
 
 
 
+    <div>
+        
+   
+        <button class="btn" onclick="submitForm()">確認送出</button>
+                
+         
+        <button class="btn" onclick="exitForm()">離開此頁</button>
+    </div>
+    <!-- Your existing script and other elements -->
+    <script>
+        
+
+        // Function to handle form submission
+        function submitForm() {
+            // Implement your form submission logic here
+            console.log('Form submitted!');
+            // You can add your form submission code or actions here
+        }
+
+        // Function to handle exit action
+        function exitForm() {
+            // Prompt the user to confirm leaving the page
+            var confirmExit = confirm("確定要離開嗎？");
+            if (confirmExit) {
+                // Open a new window and close it (this will prompt the user to allow closing the window)
+                var newWindow = window.open('', '_self');
+                newWindow.close();
+            }
+        }
+    </script>
 
 
 
 
-
-    
     <script>
         function changefield(choose, id, url) {
             var data;
