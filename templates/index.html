@@ -39,14 +39,27 @@
             /* Add any other specific styles as needed */
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js";
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous">;
+
+
+    
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            window.location.reload()
+        }
+    };
+    
+
+    </script>
+
 </head>
+
 <body>
     <div >
         <form>
             <label>請選擇練等地區：</label>
-            <select name="map_selection" id="map_selection"
+            <select name="map_selection" id="map_selection" 
                     onchange="changefield('map_selection',choosemap,'/changeselectfield/')">
                 {% for mainmap in mapdata %}
                     <option value="{{ mainmap }}"> {{ mainmap }} </option>
@@ -86,14 +99,17 @@
         </form>
     </div>
 
-
-
-
+    <div>
+        -------------------------------
+    </div>
+    <div>
+        -------------------------------
+                                                                               
     <div>
         
    
         <button class="btn" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
-                
+        <a>　　　</a>
          
         <button class="btn" onclick="exitForm()" style="padding: 15px; font-size: larger;">離開此頁</button>
     </div>
@@ -114,8 +130,9 @@
             var confirmExit = confirm("確定要離開嗎？");
             if (confirmExit) {
                 // Open a new window and close it (this will prompt the user to allow closing the window)
-                var newWindow = window.open('', '_self');
-                newWindow.close();
+
+                var customWindow = window.open('about:blank', '_self');
+                    customWindow.close();
             }
         }
     </script>
