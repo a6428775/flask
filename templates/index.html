@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+</head>
+<body>
+    <div >
+        <form>
+            <label>請選擇練等地區：</label>
+            <select name="map_selection" id="map_selection"
+                    onchange="changefield('map_selection',choosemap,'/changeselectfield/')">
+                {% for mainmap in mapdata %}
+                    <option value="{{ mainmap }}"> {{ mainmap }} </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-sm-offset-3">
+        <form class="am-form">
+            <label for="zhekou">請選擇地圖：</label>
+            <select name="choosemap" id="choosemap">
+                 {# 这里空着 等待获取后端返回的数据再写 #}
+            </select>
+            <br>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>請選擇時長：</label>
+            <select name="timelong" id="timelong">
+                {% for timelong in timelongdata %}
+                    <option value="{{ timelong }}"> {{ timelong }} </option>
+                {% endfor %}
+            </select>
+            <br>
+        </form>
+    </div>
+    <div>
+        <form>
+            <label>請選擇頻道：</label>
+            <select name="channel" id="channel">
+                {% for channel in channeldata %}
+                    <option value="{{ channel }}"> {{ channel }} </option>
+                {% endfor %}
+            </select>
+            <br>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+    
+    <script>
+        function changefield(choose, id, url) {
+            var data;
+            var select = document.getElementById(choose);
+
+            $(id).html(""); //每次重新选择当前列表框，就清空下一级列表框。
+            for (i = 0; i < select.length; i++) {
+                if (select[i].selected) { //判断被选中项
+                    Name = select[i].text;
+                    data = {
+                        "name": Name
+                    };
+                    $.post({ //发起ajax请求
+                        url: url,
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        // {#dataType:'json'#}
+                        contentType: "application/json; charset=UTF-8",
+                        
+                        success: function (data) {
+                            console.log(data);
+                            // {#console.log(data.length);#}
+                            if (data) {
+                                $("<option selected='selected' disabled='disabled'  style='display: none' value=''></option> ").appendTo(id);
+                                for (i = 0; i < data.length; i++) {
+                                    $("<option value='" + data[i] + "'>" + data[i] + "</option>").appendTo(id);
+                                }
+                            } else {
+                                alert('error')
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
