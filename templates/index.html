@@ -105,13 +105,14 @@
     </div>
     <div>
         <a id ="msgtext" style="color: red;"></a>
+        
     </div>
     <div>
         -------------------------------
                                                                                
     <div>
         
-   
+        <input id="userid" type="hidden" value="{{ userid }}">
         <button class="btn" id="btn1" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
         <a>　　　</a>
          
@@ -128,8 +129,9 @@
             var choosemap2 = $(choosemap).val();
             var timelong2 = $(timelong).val();
             var channel2 = $(channel).val();
+            var userid2 =  $(userid).val() ;
             console.log('Form submitted!');
-            console.log(map_selection2+"-"+choosemap2,timelong2,channel2);
+            console.log(map_selection2+"-"+choosemap2,timelong2,channel2,userid2);
 
             if (choosemap2 == null) {
                 $(msgtext).empty()
@@ -145,14 +147,14 @@
                 document.getElementById("btn2").disabled=true;
 
                 var formdata;
-                formdata = [map_selection2+"-"+choosemap2,timelong2,channel2];
+                formdata = [map_selection2+"-"+choosemap2,timelong2,channel2,userid2];
                 
                 // formdata={
                 //     "test":"test"
                 // }
                 $.post({ //发起ajax请求
-                        url: "https://flask-3ey7.onrender.com/getform",
-                        // url: "http://127.0.0.1:5000/getform",#本機測試用
+                        // url: "https://flask-3ey7.onrender.com/getform",
+                        url: "http://127.0.0.1:5000/getform",    //本機測試用
                         type: "POST",
                         data: JSON.stringify(formdata),
                         // {#dataType:'json'#}

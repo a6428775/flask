@@ -40,8 +40,12 @@ choosemap = {
 }
 channeldata = ["1S", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "11S", "12S", "13S", "14S", "15S", "16S", "17S", "18S", "19S", "20S", "21S", "22S", "23S", "24S", "25S", "26S", "27S", "28S", "29S", "30S"]
 timelongdata = ["0.5H", "1H", "1.5H", "2H", "3H", "4H", "活動輪(15分鐘)"]
-@app.route('/home')
-def home():
+
+
+
+
+@app.route('/home/<userid>')
+def home(userid):
     data = [
     "不設定",
     "消逝的旅途",
@@ -61,7 +65,7 @@ def home():
     "飯店阿爾克斯",
     "200等以下"
 ]
-    return render_template('index.html',mapdata=data,channeldata= channeldata,timelongdata=timelongdata)
+    return render_template('index.html',mapdata=data,channeldata= channeldata,timelongdata=timelongdata,userid=userid)
 
 @app.route('/')
 def main():
