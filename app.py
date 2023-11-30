@@ -77,12 +77,20 @@ def changeselectfield():
     else:
         return {}
 
+@app.route('/getform',methods=['POST'])
+def getform():
+  if request.method == "POST":
+    data = request.get_json()
+    print(data)
+    result = requests.post("https://active-lab-dominant.ngrok-free.app/dcrunefun", json=data)
+    result = result.text
+    return result
+
 
 def dcWebhook(payload)->None:
     dcUrl = "https://discord.com/api/webhooks/1174585592454058054/0IHX06rM2ZTO5ac4rzjh5qLsRnYbxP7AVZjr4uj_1V5dQPZp8CyfbQ299457F1GuX2ZK"
     data = {"content": str(payload)}
     requests.post(dcUrl, json=data)
-
 
 
 if __name__ == '__main__':

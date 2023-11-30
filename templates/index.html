@@ -4,7 +4,7 @@
  
 
         body {
-            font-size: 40px; /* Change font size as needed */
+            font-size: 50px; /* Change font size as needed */
             text-align: center;
         }
 
@@ -35,7 +35,7 @@
         #timelong,
         #channel,
         #btn {
-            font-size: 36px; /* Change font size for select elements */
+            font-size: 44px; /* Change font size for select elements */
             /* Add any other specific styles as needed */
         }
     </style>
@@ -56,6 +56,7 @@
 </head>
 
 <body>
+
     <div >
         <form>
             <label>請選擇練等地區：</label>
@@ -103,34 +104,91 @@
         -------------------------------
     </div>
     <div>
+        <a id ="msgtext" style="color: red;"></a>
+    </div>
+    <div>
         -------------------------------
                                                                                
     <div>
         
    
-        <button class="btn" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
+        <button class="btn" id="btn1" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
         <a>　　　</a>
          
-        <button class="btn" onclick="exitForm()" style="padding: 15px; font-size: larger;">離開此頁</button>
+        <button class="btn" id="btn2" onclick="exitForm()" style="padding: 15px; font-size: larger;">離開此頁</button>
     </div>
     <!-- Your existing script and other elements -->
     <script>
-        
 
         // Function to handle form submission
         function submitForm() {
+            
             // Implement your form submission logic here
+            var map_selection2 = $(map_selection).val();
+            var choosemap2 = $(choosemap).val();
+            var timelong2 = $(timelong).val();
+            var channel2 = $(channel).val();
             console.log('Form submitted!');
+            console.log(map_selection2+"-"+choosemap2,timelong2,channel2);
+
+            if (choosemap2 == null) {
+                $(msgtext).empty()
+                $(msgtext).append("請選擇地圖")
+            }else if (timelong2 == null){
+                $(msgtext).empty()
+                $(msgtext).append("請選擇時長")
+            }else if(channel2 == null){
+                $(msgtext).empty()
+                $(msgtext).append("請選擇幾頻道")
+            }else{
+                document.getElementById("btn1").disabled=true;
+                document.getElementById("btn2").disabled=true;
+
+                var formdata;
+                formdata = [map_selection2+"-"+choosemap2,timelong2,channel2];
+                
+                // formdata={
+                //     "test":"test"
+                // }
+                $.post({ //发起ajax请求
+                        url: "https://flask-3ey7.onrender.com/getform",
+                        // url: "http://127.0.0.1:5000/getform",#本機測試用
+                        type: "POST",
+                        data: JSON.stringify(formdata),
+                        // {#dataType:'json'#}
+                        contentType: "application/json; charset=UTF-8",
+                        
+                        success: function (data) {
+                            if (data == "success"){
+                                console.log('success');
+                                var test = $(msgtext)
+                                test.append("前往該地圖中,稍後請點我交易")
+                            }else{
+                                console.log('false')
+                                var test = $(msgtext)
+                                test.append("目前出租中")
+                            }
+                            
+                        },
+                        error:function (data) {
+                            console.log('false')
+                        }
+                    })
+
+            }
+
             // You can add your form submission code or actions here
         }
 
         // Function to handle exit action
         function exitForm() {
+
             // Prompt the user to confirm leaving the page
             var confirmExit = confirm("確定要離開嗎？");
             if (confirmExit) {
                 // Open a new window and close it (this will prompt the user to allow closing the window)
-
+                document.getElementById("btn1").disabled=true;
+                document.getElementById("btn2").disabled=true;
                 var customWindow = window.open('about:blank', '_self');
                     customWindow.close();
             }
