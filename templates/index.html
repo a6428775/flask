@@ -147,7 +147,12 @@
                 document.getElementById("btn2").disabled=true;
 
                 var formdata;
-                formdata = [map_selection2+"-"+choosemap2,timelong2,channel2,userid2];
+                if (map_selection2 == "200等以下"){
+                    formdata = [choosemap2,timelong2,channel2,userid2];
+                }else{
+                    formdata = [map_selection2+"-"+choosemap2,timelong2,channel2,userid2];
+                }
+                
                 
                 // formdata={
                 //     "test":"test"
