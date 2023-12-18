@@ -4,7 +4,7 @@
  
 
         body {
-            font-size: 50px; /* Change font size as needed */
+            font-size: 44px; /* Change font size as needed */
             text-align: center;
         }
 
@@ -35,7 +35,7 @@
         #timelong,
         #channel,
         #btn {
-            font-size: 44px; /* Change font size for select elements */
+            font-size: 34px; /* Change font size for select elements */
             /* Add any other specific styles as needed */
         }
     </style>
@@ -56,7 +56,12 @@
 </head>
 
 <body>
-
+    <div>
+        <a style="color: gold;">
+            6D輪燒     　　9000w/1h
+        </a>
+        <p></p>
+    </div>
     <div >
         <form>
             <label>請選擇練等地區：</label>
@@ -98,20 +103,20 @@
             </select>
             <br>
         </form>
-    </div>
-
+    </div>                                             
     <div>
-        -------------------------------
-    </div>
-    <div>
-        <a id ="msgtext" style="color: red;"></a>
-        
-    </div>
-    <div>
-        -------------------------------
-                                                                               
-    <div>
-        
+        <div>
+            <p>-------------------------------</p>
+            <p>
+                <a id ="msgtext" style="color: red;"></a> 
+            </p>
+            <ul style="font-size: 20px;color: deeppink;">
+                <li>租用後,請直接點我交易</li>
+                <li>如沒有所需地圖,可告知,之後新增</li>
+                <li>如選項選錯,點選LINE選單上結束,重租即可</li>
+            </ul>
+            <p>-------------------------------</p>
+        </div>
         <input id="userid" type="hidden" value="{{ userid }}">
         <button class="btn" id="btn1" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
         <a>　　　</a>
@@ -169,9 +174,7 @@
                             if (data == "success"){
                                 console.log('success');
                                 var test = $(msgtext)
-                                test.append("前往該地圖中,稍後請點我交易")
-                                test.append("可直接關閉此表單,其餘功能請直接點選官方Line選單")
-                                test.append("如選錯地圖或頻道,請點擊 LINE選單上的'提前結束'並重新租用")
+                                test.append("成功,前往該地圖中,可直接關閉表單")
                             }else{
                                 console.log('false')
                                 var test = $(msgtext)
