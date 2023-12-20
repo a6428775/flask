@@ -87,14 +87,15 @@ def changeselectfield():
 def getform():
   if request.method == "POST":
     data = request.get_json()
-    print(data)
+    strr = '有表單'
+    dcWebhook(strr)
     result = requests.post("https://active-lab-dominant.ngrok-free.app/dcrunefun", json=data)
     result = result.text
     return result
 
 
 def dcWebhook(payload)->None:
-    dcUrl = "https://discord.com/api/webhooks/1174585592454058054/0IHX06rM2ZTO5ac4rzjh5qLsRnYbxP7AVZjr4uj_1V5dQPZp8CyfbQ299457F1GuX2ZK"
+    dcUrl = "https://discord.com/api/webhooks/1187035552877379615/ZM3wmvwKed_d7nNJytPlwd94RCwgIVsVToOMbASQfSOiS4fOm3sMc4pU5h7jZy8nQab7"
     data = {"content": str(payload)}
     requests.post(dcUrl, json=data)
 
