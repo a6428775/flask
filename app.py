@@ -87,7 +87,7 @@ def changeselectfield():
 def getform():
   if request.method == "POST":
     data = request.get_json()
-    strrr = json.dumps(data)
+    strrr = json.dumps(data,ensure_ascii=False)
     strr = '有表單\n' + strrr
     dcWebhook(strr)
     result = requests.post("https://active-lab-dominant.ngrok-free.app/dcrunefun", json=data)
