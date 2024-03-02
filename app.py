@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template,request
 import requests 
-
+import json
 
 app = Flask(__name__)
 
@@ -87,7 +87,8 @@ def changeselectfield():
 def getform():
   if request.method == "POST":
     data = request.get_json()
-    strr = '有表單'
+    strrr = json.dumps(data)
+    strr = '有表單\n' + strrr
     dcWebhook(strr)
     result = requests.post("https://active-lab-dominant.ngrok-free.app/dcrunefun", json=data)
     result = result.text
