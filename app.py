@@ -5,7 +5,7 @@ import json
 app = Flask(__name__)
 
 choosemap = {
-    "不設定": ["不設定"],
+    "不設定": ["請先選擇地區"],
     "消逝的旅途": ["風化的開心之地","風化的開心與憤怒之地","風化的憤怒之地","風化的憤怒與悲傷之地","風化的悲傷之地","風化的悲傷與歡樂之地","風化的歡樂之地","隱藏的湖水邊","岩石領土","岩石和火焰領土","火焰領土","火焰和靈魂領土","靈魂領土","隱藏的火焰地帶","三岔路1","洞穴西側路1","洞穴西側路2","洞穴東側路1","洞穴東側路2","三岔路2","洞穴下側","洞穴上側","洞穴深處","亞勒瑪隱身處","隱藏的洞穴"
 ],
     "反轉城市": ["地下線路1","地下線路2","地下線路3","地下線路4","地下線路5","地下線路6","T-boy的研究列車1","T-boy的研究列車2","T-boy的研究列車3","隱藏研究列車","地下列車1","地下列車2","地下列車3","隱藏地下列車","地上列車1","地上列車2","地上列車3","隱藏M高塔","M高塔2","M高塔3","M高塔4"
@@ -83,16 +83,55 @@ def changeselectfield():
     else:
         return {}
 
+#戰地跑圖用
+@app.route('/change/<userid>')
+def changemap(userid):
+    data = [
+    "不設定",
+    # "消逝的旅途",
+    # "反轉城市",
+    # "啾啾艾爾蘭",
+    # "嚼嚼艾爾蘭",
+    # "拉契爾恩",
+    # "阿爾卡娜",
+    # "魔菈斯",
+    # "艾斯佩拉",
+    # "賽拉斯",
+    # "月之橋",
+    # "苦痛迷宮",
+    # "利曼",
+    # "賽爾尼溫",
+    # "燃燒的賽爾尼溫",
+    # "飯店阿爾克斯",
+    "200等以下"
+    ]
+    
+    return render_template('changemap.html',mapdata=data,userid=userid)
+
+
+
 @app.route('/getform',methods=['POST'])
 def getform():
   if request.method == "POST":
     data = request.get_json()
     strrr = json.dumps(data,ensure_ascii=False)
-    strr = '有表單\n' + strrr
+    strr = '有租輪表單\n' + strrr
     dcWebhook(strr)
     result = requests.post("https://active-lab-dominant.ngrok-free.app/dcrunefun", json=data)
     result = result.text
     return result
+
+@app.route('/getchangemapform',methods=['POST'])
+def getchangemapform():
+  if request.method == "POST":
+    data = request.get_json()
+    strrr = json.dumps(data,ensure_ascii=False)
+    strr = '有換團表單\n' + strrr
+    dcWebhook(strr)
+    result = requests.post("https://active-lab-dominant.ngrok-free.app/gomapfun", json=data)
+    result = result.text
+    return result
+
 
 
 def dcWebhook(payload)->None:

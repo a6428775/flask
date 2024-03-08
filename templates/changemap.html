@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<head>
+    <style>
+ 
+
+        body {
+            font-size: 46px; /* Change font size as needed */
+            text-align: center;
+        }
+
+        /* Adjustments for smaller screens */
+        @media screen and (max-width: 1080px) {
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            /* Adjust specific elements for smaller screens if needed */
+            #map_selection,
+            #choosemap,
+            /* #timelong, */
+            /* #channel, */
+            #btn {
+                width: 80%; /* Adjust width as needed */
+                margin: 5px 0;
+                /* Add any other specific styles as needed */
+            }
+        }
+
+        /* Additional styles for specific elements if needed */
+        #map_selection,
+        #choosemap,
+        /* #timelong, */
+        /* #channel, */
+        #btn {
+            font-size: 36px; /* Change font size for select elements */
+            /* Add any other specific styles as needed */
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.js";
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous">;
+
+
+    
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            window.location.reload()
+        }
+    };
+    
+
+    </script>
+
+</head>
+
+<body>
+
+    <div >
+        <form>
+            <label>請選擇練等地區：</label>
+            <select name="map_selection" id="map_selection" 
+                    onchange="changefield('map_selection',choosemap,'/changeselectfield/')">
+                {% for mainmap in mapdata %}
+                    <option value="{{ mainmap }}"> {{ mainmap }} </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="am-u-lg-3 am-u-md-3 am-u-sm-3 am-u-sm-offset-3">
+        <form class="am-form">
+            <label for="zhekou">請選擇要移動地圖：</label>
+            <select name="choosemap" id="choosemap">
+                 {# 这里空着 等待获取后端返回的数据再写 #}
+            </select>
+            <br>
+        </form>
+    </div>
+    <!-- <div>
+        <form>
+            <label>請選擇時長：</label>
+            <select name="timelong" id="timelong">
+                {% for timelong in timelongdata %}
+                    <option value="{{ timelong }}"> {{ timelong }} </option>
+                {% endfor %}
+            </select>
+            <br>
+        </form>
+    </div> -->
+    <!-- <div>
+        <form>
+            <label>請選擇頻道：</label>
+            <select name="channel" id="channel">
+                {% for channel in channeldata %}
+                    <option value="{{ channel }}"> {{ channel }} </option>
+                {% endfor %}
+            </select>
+            <br>
+        </form>
+    </div>                                              -->
+    <div>
+        <div>
+
+            <p>-------------------------------</p>
+            
+                <p>
+                    <a id ="msgtext" style="color: red;"></a> 
+                </p>
+                <ul style="font-size: 26px;color: deeppink;">
+                    <li>跑圖用表單</li>
+                    <li>請勿頻繁送出表單</li>
+                    <li>換圖後自行補輪 輸入"!補輪"</li>
+                    <li>燃燒CD時間30分鐘 換圖無法補放</li>
+                    <!-- <li>LP付款方式:(LP付款完後,點選輪燒角色交易並直接按確認 才會開始輪燒)</li>    -->
+                    <!-- <a href="https://cdn.discordapp.com/attachments/611543278474493982/1204701275384717332/IMG_3862.jpg?ex=65d5b07e&is=65c33b7e&hm=905e09e0d974840903acb1f9ea197b2757b7e7589508f3f998be394d2c562b41&"><img src="https://cdn.discordapp.com/attachments/611543278474493982/1204701275384717332/IMG_3862.jpg?ex=65d5b07e&is=65c33b7e&hm=905e09e0d974840903acb1f9ea197b2757b7e7589508f3f998be394d2c562b41&" width="130" height="130" > </a>          -->
+                    <!-- <img src="https://github.com/a6428775/flask/blob/main/templates/LinepayQR.jpg?raw=true" width="130" height="130"/> -->
+                </ul>
+                -------------------------------
+            
+            
+        </div>
+        <input id="userid" type="hidden" value="{{ userid }}">
+        <button class="btn" id="btn1" onclick="submitForm()" style="padding: 15px;font-size: larger;" >確認送出</button>
+        <a>　　</a>
+         
+        <button class="btn" id="btn2" onclick="exitForm()" style="padding: 15px; font-size: larger;">離開此頁</button>
+    </div>
+    <!-- Your existing script and other elements -->
+    <script>
+
+        // Function to handle form submission
+        function submitForm() {
+            
+            // Implement your form submission logic here
+            var map_selection2 = $(map_selection).val();
+            var choosemap2 = $(choosemap).val();
+            // var timelong2 = $(timelong).val();
+            // var channel2 = $(channel).val();
+            var userid2 =  $(userid).val() ;
+            console.log('Form submitted!');
+            console.log(map_selection2+"-"+choosemap2,userid2);
+
+            if (choosemap2 == null) {
+                $(msgtext).empty()
+                $(msgtext).append("請選擇地圖")
+            // }else if (timelong2 == null){
+            //     $(msgtext).empty()
+            //     $(msgtext).append("請選擇時長")
+            // }else if(channel2 == null){
+            //     $(msgtext).empty()
+            //     $(msgtext).append("請選擇幾頻道")
+            }else{
+                document.getElementById("btn1").disabled=true;
+                document.getElementById("btn2").disabled=true;
+
+                var formdata;
+                if (map_selection2 == "200等以下"){
+                    formdata = [choosemap2,userid2];
+                }else{
+                    formdata = [map_selection2+"-"+choosemap2,userid2];
+                }
+                
+                
+                // formdata={
+                //     "test":"test"
+                // }
+                $.post({ //发起ajax请求
+                        url: "https://flask-3ey7.onrender.com/getchangemapform",
+                        // url: "http://127.0.0.1:5000/getchangemapform",    //本機測試用
+                        type: "POST",
+                        data: JSON.stringify(formdata),
+                        // {#dataType:'json'#}
+                        contentType: "application/json; charset=UTF-8",
+                        
+                        success: function (data) {
+                            if (data == "success"){
+                                console.log('success');
+                                var test = $(msgtext)
+                                test.append("成功,前往該地圖中,可直接關閉表單")
+                            }else{
+                                console.log('false')
+                                var test = $(msgtext)
+                                test.append("過於頻繁送出表單, 請稍後再試") 
+
+                            }
+                            
+                        },
+                        error:function (data) {
+                            console.log('false')
+                        }
+                    })
+
+            }
+
+            // You can add your form submission code or actions here
+        }
+
+        // Function to handle exit action
+        function exitForm() {
+            
+            // Prompt the user to confirm leaving the page
+            var confirmExit = confirm("確定要離開嗎？");
+            if (confirmExit) {
+                // Open a new window and close it (this will prompt the user to allow closing the window)
+                document.getElementById("btn1").disabled=true;
+                document.getElementById("btn2").disabled=true;
+                var customWindow = window.open('about:blank', '_self');
+                    customWindow.close();
+            }
+        }
+    </script>
+
+
+
+
+    <script>
+        function changefield(choose, id, url) {
+            var data;
+            var select = document.getElementById(choose);
+
+            $(id).html(""); //每次重新选择当前列表框，就清空下一级列表框。
+            for (i = 0; i < select.length; i++) {
+                if (select[i].selected) { //判断被选中项
+                    Name = select[i].text;
+                    data = {
+                        "name": Name
+                    };
+                    $.post({ //发起ajax请求
+                        url: url,
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        // {#dataType:'json'#}
+                        contentType: "application/json; charset=UTF-8",
+                        
+                        success: function (data) {
+                            console.log(data);
+                            // {#console.log(data.length);#}
+                            if (data) {
+                                $("<option selected='selected' disabled='disabled'  style='display: none' value=''></option> ").appendTo(id);
+                                for (i = 0; i < data.length; i++) {
+                                    $("<option value='" + data[i] + "'>" + data[i] + "</option>").appendTo(id);
+                                }
+                            } else {
+                                alert('error')
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
