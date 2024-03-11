@@ -68,7 +68,7 @@ def home(userid):
     "200等以下"
     ]
     
-    return render_template('index.html',mapdata=data,channeldata= channeldata,timelongdata=timelongdata,userid=userid)
+    return render_template('index.html',mapdata=data,channeldata= channeldata,timelongdata=timelongdata,userid=userid,autofiredata=autofiredata)
 
 @app.route('/')
 def main():
