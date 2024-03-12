@@ -6,7 +6,7 @@
         body {
             min-width: 720px;
             min-height: 960px;
-            font-size: 46px; /* Change font size as needed */
+            font-size: 45px; /* Change font size as needed */
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -44,7 +44,7 @@
         #channel,
         #autofire,
         #btn {
-            font-size: 36px; /* Change font size for select elements */
+            font-size: 34px; /* Change font size for select elements */
             /* Add any other specific styles as needed */
         }
     </style>
@@ -117,6 +117,8 @@
                 {% endfor %}
             </select>
             <br>
+            <li style="font-size: 18px; color: red;">!補燒 : 補放燃燒 (租用剩餘時間低於30分鐘無法使用!補燒 租30分勿選自行放燒)</li>
+            <li style="font-size: 18px; color: red;">均15~20%無冷</li>
         </form>
 
 
@@ -126,12 +128,11 @@
             <a>
                 <a id ="msgtext" style="color: red;"></a> 
                 
-                <ul style="font-size: 26px;color: deeppink;">
+                <ul style="font-size: 25px;color: deeppink;">
                     <li>琉德輪燒　1E / 1h　LP付款碼 (8T/0.5H , 15T/H)</li>
                     <li>租用後,請直接點我交易,交易完成後會直接開始輪燒</li>
                     <li>直接點交易,不要再問多少錢　僅以下三隻,別交易錯人了</li>
-                    <li>ID:拉拉拉拉月月　ID:我不要菈菈了　ID:打HD專用0002</li>
-                    <li>!補燒 : 補放燃燒 (租用剩餘時間低於30分鐘無法使用!補燒)</li>
+                    <li>ID:拉拉拉拉月月　ID:我不要菈菈了　ID:打HD專用0002</li>                   
                     <li>LP付款方式:(LP付款完後,點選輪燒角色交易並直接按確認 才會開始輪燒)</li>   
                     <!-- <a href="https://cdn.discordapp.com/attachments/611543278474493982/1204701275384717332/IMG_3862.jpg?ex=65d5b07e&is=65c33b7e&hm=905e09e0d974840903acb1f9ea197b2757b7e7589508f3f998be394d2c562b41&"><img src="https://cdn.discordapp.com/attachments/611543278474493982/1204701275384717332/IMG_3862.jpg?ex=65d5b07e&is=65c33b7e&hm=905e09e0d974840903acb1f9ea197b2757b7e7589508f3f998be394d2c562b41&" width="130" height="130" > </a>          -->
                     <img src="https://github.com/a6428775/flask/blob/main/templates/LinepayQR.jpg?raw=true" width="130" height="130"/>
