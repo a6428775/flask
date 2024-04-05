@@ -12,25 +12,30 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 100%;
         }
 
         /* Adjustments for smaller screens */
-        @media screen and (max-width: 1080px) and (min-height: 960px) {
+        @media screen and (max-width: 1080px)  {
             body {
+
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                height: 100vh;
+                height: 100%;
+                
             }
+
             /* Adjust specific elements for smaller screens if needed */
+            #form_text{white-space: nowrap;}
             #map_selection,
             #choosemap,
             #timelong,
             #channel,
             #autofire,
             #btn {
+
                 width: 80%; /* Adjust width as needed */
                 margin: 5px 0;
                 /* Add any other specific styles as needed */
@@ -38,6 +43,7 @@
         }
 
         /* Additional styles for specific elements if needed */
+        
         #map_selection,
         #choosemap,
         #timelong,
@@ -119,7 +125,7 @@
             <br>
             <li style="font-size: 18px; color: red;">!補燒 : 補放燃燒 (租用剩餘時間低於30分鐘無法使用!補燒 租30分勿選自行放燒)</li>
             <li style="font-size: 18px; color: red;">均15~20%無冷</li>
-        </form>
+        </form >
 
 
 
@@ -128,7 +134,7 @@
             <a>
                 <a id ="msgtext" style="color: red;"></a> 
                 
-                <ul style="font-size: 25px;color: deeppink;">
+                <ul class = "form_text" id="form_text" style="font-size: 25px;color: deeppink;">
                     <li>琉德輪燒　1E / 1h　LP付款碼 (8T/0.5H , 15T/H)</li>
                     <li>租用後,請直接點我交易,交易完成後會直接開始輪燒</li>
                     <li>直接點交易,不要再問多少錢　僅以下三隻,別交易錯人了</li>
