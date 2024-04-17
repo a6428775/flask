@@ -122,7 +122,7 @@ def changemap(userid):
 
 #吸趴用
 @app.route('/shareexp/<userid>')
-def changemap(userid):
+def shareexp(userid):
     data = [
     "不設定",
     # "消逝的旅途",
@@ -168,7 +168,7 @@ def getchangemapform():
     return result
 
 @app.route('/getformteam',methods=['POST'])
-def getform():
+def getshareexpform():
   if request.method == "POST":
     data = request.get_json()
     strrr = json.dumps(data,ensure_ascii=False)
