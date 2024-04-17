@@ -50,7 +50,7 @@ choosemap = {
 channeldata = ["1S", "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "11S", "12S", "13S", "14S", "15S", "16S", "17S", "18S", "19S", "20S", "21S", "22S", "23S", "24S", "25S", "26S", "27S", "28S", "29S", "30S"]
 timelongdata = ["0.5H", "1H", "1.5H", "2H","2.5H", "3H","3.5H", "4H", "6H", "8H", "12H", "活動輪(15分鐘)"]
 autofiredata = ['每30分鐘放燒','自行輸入指令放燒']
-
+autofiredatateam = ['每30分鐘放燒(吸趴)','自行輸入指令放燒(吸趴)']
 
 
 
@@ -120,7 +120,30 @@ def changemap(userid):
     
     return render_template('changemap.html',mapdata=data,userid=userid)
 
-
+#吸趴用
+@app.route('/shareexp/<userid>')
+def changemap(userid):
+    data = [
+    "不設定",
+    # "消逝的旅途",
+    # "反轉城市",
+    # "啾啾艾爾蘭",
+    # "嚼嚼艾爾蘭",
+    # "拉契爾恩",
+    # "阿爾卡娜",
+    # "魔菈斯",
+    # "艾斯佩拉",
+    # "賽拉斯",
+    # "月之橋",
+    # "苦痛迷宮",
+    # "利曼",
+    "賽爾尼溫",
+    "燃燒的賽爾尼溫",
+    "飯店阿爾克斯",
+    # "200等以下"
+    ]
+    
+    return render_template('shareexp.html',mapdata=data,channeldata= channeldata,timelongdata=timelongdata,userid=userid,autofiredatateam=autofiredatateam)
 
 @app.route('/getform',methods=['POST'])
 def getform():
@@ -144,6 +167,16 @@ def getchangemapform():
     result = result.text
     return result
 
+@app.route('/getformteam',methods=['POST'])
+def getform():
+  if request.method == "POST":
+    data = request.get_json()
+    strrr = json.dumps(data,ensure_ascii=False)
+    strr = '有租吸趴輪表單\n' + strrr
+    dcWebhook(strr)
+    result = requests.post("https://active-lab-dominant.ngrok-free.app/dcrunefun", json=data)
+    result = result.text
+    return result
 
 
 def dcWebhook(payload)->None:
