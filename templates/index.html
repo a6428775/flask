@@ -171,6 +171,10 @@
             var userid2 =  $(userid).val() ;
             var autofire2 =  $(autofire).val() ;
 
+            if (channel2 == ''){
+                channel2 = null
+            }
+
             console.log('Form submitted!');
             console.log(map_selection2+"-"+choosemap2,timelong2,channel2,userid2,autofire2);
 
